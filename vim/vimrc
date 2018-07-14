@@ -24,6 +24,11 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'jpo/vim-railscasts-theme'
+Plugin 'pangloss/vim-javascript'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-bundler'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'jiangmiao/auto-pairs'
 
 
 " All of your Plugins must be added before the following line
@@ -41,10 +46,13 @@ filetype plugin indent on    " required
 """"""""""""""""""""""""
 
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
-let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
-let g:ctrlp_use_caching = 0
-
-
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_user_command = {
+      \ 'types': {
+      \ 1: ['.git', 'git --git-dir=%s/.git ls-files -oc --exclude-standard'],
+      \ },
+      \ 'fallback': 'find %s -type f'
+      \ }
 
 """""""""""""""""""""""""
 "
@@ -62,6 +70,7 @@ nmap <leader>co ggVG*y
 
 " Edit the db/schema.rb Rails file in a split
 nmap <leader>sc :split db/schema.rb<cr>
+map <leader>C :CtrlPClearCache<cr>
 
 
 
@@ -72,10 +81,8 @@ nmap <leader>sc :split db/schema.rb<cr>
 """"""""""""""""""""""""
 
 nmap 0 ^
-nmap k gk
-nmap j gj 
 imap <C-s> <esc>:w<CR>
-
+nmap <C-c> :g/# /d<CR>
 
 
 """"""""""""""""""""""""
@@ -94,4 +101,10 @@ set shiftwidth=2
 set softtabstop=2
 set secure
 set autowrite
-set history=1000                      " Remember last 1000 commands
+set history=50                       " Remember last 1000 commands
+set numberwidth=5
+set textwidth=80
+set colorcolumn=+1
+syntax on
+colorscheme triplejelly
+
