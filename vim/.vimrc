@@ -28,7 +28,25 @@ nnoremap <C-p> :<C-u>FZF<CR>
 " For JavaScript files, use `eslint` (and only eslint)
 let g:ale_linters = {
 \ 	'javascript': ['eslint'],
+\ 	'ruby': ['rubocop'],
 \ }
+
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️ '
+let g:ale_fix_on_save = 1
+
+let g:ale_linters_explicit = 1
+let g:ale_history_log_output = 1
+
+let g:ale_fixers = {
+\   'ruby': ['rubocop', 'remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier', 'eslint'],
+\   'typescript': ['eslint'],
+\   'css': ['prettier']
+\}
+
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_ruby_rubocop_options = '-D'
 
 " Mappings in the style of unimpaired-next
 " Use [w ]w to navigate warnings
